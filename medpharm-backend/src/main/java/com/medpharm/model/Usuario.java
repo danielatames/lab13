@@ -23,5 +23,5 @@ public class Usuario {
     private String nombreCompleto;
 
     @Column(nullable = false, length = 30)
-    private String rol; // MEDICO, FARMACEUTICO
+    private String rol; 
 }
