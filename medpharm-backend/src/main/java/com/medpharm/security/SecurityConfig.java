@@ -45,13 +45,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())                        // API stateless: no usa cookies
-            .cors(Customizer.withDefaults())                     // usa el bean corsConfigurationSource
+            .csrf(csrf -> csrf.disable())                      
+            .cors(Customizer.withDefaults())                     
             .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .headers(h -> h.frameOptions(f -> f.sameOrigin()))  // necesario para la consola H2
+            .headers(h -> h.frameOptions(f -> f.sameOrigin()))  
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()   // preflight CORS
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()   
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers(PathRequest.toH2Console()).permitAll()
                 .requestMatchers("/error").permitAll()
