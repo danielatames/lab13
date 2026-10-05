@@ -27,7 +27,7 @@ public class RecetaMedica {
     private Usuario medico;
 
     @Column(nullable = false, length = 20)
-    private String estado = "PENDIENTE"; // PENDIENTE, DESPACHADA, CANCELADA
+    private String estado = "PENDIENTE"; 
 
     @Column(name = "fecha_emision", nullable = false)
     private LocalDateTime fechaEmision;
@@ -35,7 +35,6 @@ public class RecetaMedica {
     @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleReceta> detalles = new ArrayList<>();
 
-    // Mantiene sincronizados ambos lados de la relación
     public void agregarDetalle(DetalleReceta detalle) {
         detalles.add(detalle);
         detalle.setReceta(this);
