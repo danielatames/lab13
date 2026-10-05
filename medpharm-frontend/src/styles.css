@@ -1,1 +1,46 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --mp-rosa: #d63384;
+  --mp-rosa-oscuro: #ab296a;
+  --mp-rosa-claro: #fdf0f6;
+
+  --bs-primary: #d63384;
+  --bs-primary-rgb: 214, 51, 132;
+  --bs-link-color: #d63384;
+  --bs-link-color-rgb: 214, 51, 132;
+  --bs-link-hover-color: #ab296a;
+  --bs-link-hover-color-rgb: 171, 41, 106;
+}
+
+body {
+  background-color: var(--mp-rosa-claro);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--mp-rosa);
+  --bs-btn-border-color: var(--mp-rosa);
+  --bs-btn-hover-bg: var(--mp-rosa-oscuro);
+  --bs-btn-hover-border-color: var(--mp-rosa-oscuro);
+  --bs-btn-active-bg: var(--mp-rosa-oscuro);
+  --bs-btn-active-border-color: var(--mp-rosa-oscuro);
+  --bs-btn-disabled-bg: var(--mp-rosa);
+  --bs-btn-disabled-border-color: var(--mp-rosa);
+  --bs-btn-focus-shadow-rgb: 214, 51, 132;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--mp-rosa);
+  --bs-btn-border-color: var(--mp-rosa);
+  --bs-btn-hover-bg: var(--mp-rosa);
+  --bs-btn-hover-border-color: var(--mp-rosa);
+  --bs-btn-active-bg: var(--mp-rosa-oscuro);
+  --bs-btn-active-border-color: var(--mp-rosa-oscuro);
+  --bs-btn-focus-shadow-rgb: 214, 51, 132;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #eb9cc4;
+  box-shadow: 0 0 0 0.25rem rgba(214, 51, 132, 0.25);
+}
