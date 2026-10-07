@@ -3,7 +3,9 @@
     <a class="navbar-brand fw-bold" routerLink="/recetas">MedPharm Express</a>
     <div class="navbar-nav me-auto">
       <a class="nav-link" routerLink="/recetas">Recetas</a>
-      <a class="nav-link" routerLink="/nueva-receta">Nueva receta</a>
+      @if (auth.rol() === 'MEDICO') {
+        <a class="nav-link" routerLink="/nueva-receta">Nueva receta</a>
+      }
     </div>
     <span class="navbar-text text-white me-3">
       {{ auth.username() }} <span class="badge bg-light text-primary">{{ auth.rol() }}</span>
