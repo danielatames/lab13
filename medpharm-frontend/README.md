@@ -1,59 +1,60 @@
-# MedpharmFrontend
+# MedPharm Express — Laboratorio 13
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.27.
+**Universidad de Costa Rica · Sede del Atlántico, Recinto Paraíso**
+**Curso:** IF0009 Desarrollo de Software IV · II-2026
+**Estudiante:** Daniela Tames Vega · C5K177
 
-## Development server
 
-To start a local development server, run:
+## Cómo ejecutar
 
-```bash
-ng serve
-```
+**Requisitos:** JDK 21, Node.js 20+, Angular CLI 19.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+**Backend** (puerto 8080):
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+cd medpharm-backend
+./mvnw spring-boot:run      
 
-```bash
-ng generate component component-name
-```
+**Frontend** (puerto 4200):
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+cd medpharm-frontend
+npm install
+npx ng serve
 
-## Building
 
-To build the project run:
+Abrir `http://localhost:4200`.
 
-```bash
-ng build
-```
+**Usuarios de prueba** (contraseña password123):
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+| Usuario | Rol | En la interfaz |
+|---|---|---|
+| `medico1` | MEDICO | Consulta recetas y emite recetas nuevas |
+| `farma1` | FARMACEUTICO | Consulta, despacha y cancela recetas pendientes |
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
+## Error 401
 
-## Running end-to-end tests
+### Procedimiento
 
-For end-to-end (e2e) testing, run:
+1. Se inició sesión normalmente, de modo que el token quedó guardado en `localStorage`.
+2. En `app.config.ts` se quitó el registro del interceptor:
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+   // Antes
+   provideHttpClient(withInterceptors([authInterceptor]))
+   // Durante la prueba
+   provideHttpClient()
 
-## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. Se navegó a `/recetas`. El guard permitió el acceso (el token sí existe en `localStorage`), pero la petición `GET /api/v1/recetas` falló.
+
+### Evidencia
+
+![Error 401 sin interceptor](docs/error_jwt_401.png)
+
+
+### ¿Por qué el servidor rechazó la petición?
+
+La API es stateless: no guarda sesiones ni usa cookies (SessionCreationPolicy.STATELESS). Cada petición debe demostrar por sí sola quién la envía, y la única forma de hacerlo es el encabezado Authorization: Bearer <token>.
