@@ -58,4 +58,3 @@ Abrir `http://localhost:4200`.
 ### ¿Por qué el servidor rechazó la petición?
 
 La API es stateless: no guarda sesiones ni usa cookies (SessionCreationPolicy.STATELESS). Cada petición debe demostrar por sí sola quién la envía, y la única forma de hacerlo es el encabezado Authorization: Bearer <token>.
-hola
