@@ -31,15 +31,13 @@ public class RecetaController {
     }
 
     @PostMapping
-    public ResponseEntity<RecetaResponseDTO> crear(@Valid @RequestBody RecetaRequestDTO dto,
-                                                   Authentication auth) {
+    public ResponseEntity<RecetaResponseDTO> crear(@Valid @RequestBody RecetaRequestDTO dto,Authentication auth) {
         RecetaResponseDTO creada = recetaService.crear(dto, auth.getName());
         return ResponseEntity.created(URI.create("/api/v1/recetas/" + creada.id())).body(creada);
     }
 
     @PatchMapping("/{id}/estado")
-    public RecetaResponseDTO cambiarEstado(@PathVariable Long id,
-                                           @Valid @RequestBody EstadoUpdateDTO dto) {
+    public RecetaResponseDTO cambiarEstado(@PathVariable Long id,@Valid @RequestBody EstadoUpdateDTO dto) {
         return recetaService.cambiarEstado(id, dto.estado());
     }
 }

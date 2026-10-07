@@ -55,6 +55,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AuthenticationException.class)
     public ProblemDetail credenciales(AuthenticationException ex, HttpServletRequest req) {
+        log.warn(">>> Fallo de autenticación: {} - {}", ex.getClass().getName(), ex.getMessage(), ex);
         return problema(HttpStatus.UNAUTHORIZED, "Credenciales inválidas",
                 "Usuario o contraseña incorrectos", req);
     }
