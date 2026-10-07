@@ -42,10 +42,8 @@ Abrir `http://localhost:4200`.
 2. En `app.config.ts` se quitó el registro del interceptor:
 
 
-   // Antes
-   provideHttpClient(withInterceptors([authInterceptor]))
-   // Durante la prueba
-   provideHttpClient()
+   - Antes:  provideHttpClient(withInterceptors([authInterceptor]))
+   - Durante la prueba: provideHttpClient()
 
 
 3. Se navegó a `/recetas`. El guard permitió el acceso (el token sí existe en `localStorage`), pero la petición `GET /api/v1/recetas` falló.
